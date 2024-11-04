@@ -6,9 +6,9 @@ exports.createPost = async (req, res) => {
   try {
     console.log('req.body:', req.body);
     const { title, content, restaurantName, location, rating, images } = req.body;
-    // req.user에서 userId를 가져오기
-    const userId = req.user.userId;
-    console.log('userId:', userId);
+    // req.user에서 userId를 가져오기;
+    const userId = req.userId;
+    console.log('userId:', req.userId);
     const newPost = await Post.create({ userId, title, content, restaurantName, location, rating, images });
     res.status(201).json(newPost);
   } catch (error) {
