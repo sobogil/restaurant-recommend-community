@@ -5,8 +5,7 @@ const Comment = require('../models/Comment');
 exports.addComment = async (req, res) => {
   try {
     const { content } = req.body;
-    const newComment = new Comment({ postId: req.params.postId, authorId: req.userId, content });
-    await newComment.save();
+    const newComment = await Comment.create({ postId: req.params.postId, userId: req.userId, content });
     res.status(201).json(newComment);
   } catch (error) {
     res.status(500).json({ error: 'Error adding comment' });
@@ -27,7 +26,7 @@ exports.getComments = async (req, res) => {
 exports.deleteComment = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.commentId);
-    if (comment.authorId !== req.userId) return res.status(403).json({ error: 'Unauthorized' });
+    if (comment.userId !== req.userId) return res.status(403).json({ error: 'Unauthorized' });
     await comment.remove();
     res.status(200).json({ message: 'Comment deleted' });
   } catch (error) {

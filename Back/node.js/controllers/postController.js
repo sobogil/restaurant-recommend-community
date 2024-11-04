@@ -4,11 +4,15 @@ const Post = require('../models/Post');
 // 게시글 작성
 exports.createPost = async (req, res) => {
   try {
+    console.log('req.body:', req.body);
     const { title, content, restaurantName, location, rating, images } = req.body;
-    const newPost = new Post({ authorId: req.userId, title, content, restaurantName, location, rating, images });
-    await newPost.save();
+    // req.user에서 userId를 가져오기
+    const userId = req.user.userId;
+    console.log('userId:', userId);
+    const newPost = await Post.create({ userId, title, content, restaurantName, location, rating, images });
     res.status(201).json(newPost);
   } catch (error) {
+    console.error('Error creating post:', error);
     res.status(500).json({ error: 'Error creating post' });
   }
 };
@@ -37,7 +41,7 @@ exports.getPostById = async (req, res) => {
 exports.updatePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
-    if (post.authorId !== req.userId) return res.status(403).json({ error: 'Unauthorized' });
+    if (post.userId !== req.userId) return res.status(403).json({ error: 'Unauthorized' });
     Object.assign(post, req.body);
     await post.save();
     res.status(200).json(post);
@@ -50,7 +54,7 @@ exports.updatePost = async (req, res) => {
 exports.deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
-    if (post.authorId !== req.userId) return res.status(403).json({ error: 'Unauthorized' });
+    if (post.userId !== req.userId) return res.status(403).json({ error: 'Unauthorized' });
     await post.remove();
     res.status(200).json({ message: 'Post deleted' });
   } catch (error) {

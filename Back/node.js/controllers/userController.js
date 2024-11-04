@@ -8,8 +8,7 @@ exports.registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
-    await newUser.save();
+    const newUser = await User.create({ username, email, password: hashedPassword });
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Error registering user' });
@@ -21,16 +20,23 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+    
+    // 사용자 존재 여부와 비밀번호 확인
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // MongoDB의 _id를 사용하여 JWT 생성
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    console.log('User found:', user); // 사용자 정보 확인
+    console.log('Generated Token:', token); // 생성된 토큰 출력
+
+    // 토큰을 클라이언트에 반환
     res.status(200).json({ token });
   } catch (error) {
     res.status(500).json({ error: 'Error logging in' });
   }
 };
-
 // 사용자 프로필 조회
 exports.getUserProfile = async (req, res) => {
   try {

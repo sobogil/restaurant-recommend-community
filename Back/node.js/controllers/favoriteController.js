@@ -5,8 +5,7 @@ const Favorite = require('../models/Favorite');
 exports.addFavorite = async (req, res) => {
   try {
     const { restaurantId, restaurantName, location } = req.body;
-    const newFavorite = new Favorite({ userId: req.userId, restaurantId, restaurantName, location });
-    await newFavorite.save();
+    const newFavorite = await Favorite.create({ userId: req.userId, restaurantId, restaurantName, location });
     res.status(201).json(newFavorite);
   } catch (error) {
     res.status(500).json({ error: 'Error adding favorite' });
