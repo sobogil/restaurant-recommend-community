@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  padding-top: 70px; /* 네비게이션 바 높이만큼 패딩 추가 */
+}

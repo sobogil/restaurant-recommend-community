@@ -30,6 +30,7 @@ exports.getPosts = async (req, res) => {
 // 특정 게시글 조회
 exports.getPostById = async (req, res) => {
   try {
+    console.log('req.params:', req.params);
     const post = await Post.findById(req.params.postId);
     res.status(200).json(post);
   } catch (error) {

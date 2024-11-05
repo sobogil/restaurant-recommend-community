@@ -1,20 +1,36 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, AuthContext } from '../context/AuthContext'; // AuthProvider import
 import Login from './page/Login'; // Login 컴포넌트 import
 import Welcome from './page/Welcome'; // Welcome 컴포넌트 import
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../App.css';
+import Header from './page/Header';
+import Register from './page/Register';
+import PostList from './page/PostList';
+import CreatePost from './page/CreatePost';
+import PostDetail from './page/PostDetail';
+
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route 
-            path="/welcome" 
-            element={<PrivateRoute><Welcome /></PrivateRoute>} 
-          />
-        </Routes>
+        <div className="App">
+          <Header /> {/* Header 컴포넌트를 렌더링 */}
+          <div className="auth-wrapper">
+            <div className="auth-inner">
+              <Routes>
+                <Route exact path="/" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/welcome" element={<PrivateRoute><Welcome /></PrivateRoute>} />
+                <Route path="/posts" element={<PostList />} />
+                <Route path="/posts/:postId" element={<PostDetail />} />
+                <Route path="/posts/create" element={<CreatePost />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
       </Router>
     </AuthProvider>
   );
