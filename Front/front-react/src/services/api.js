@@ -52,3 +52,6 @@ export const getFavorites = (token) => api.get('/favorites', {
 export const removeFavorite = (token, restaurantId) => api.delete(`/favorites/${restaurantId}`, {
   headers: { Authorization: token },
 });
+
+//네이버 레스토랑 정보 가져오는 api
+export const fetchRestaurants = (query) => api.get(`/restaurants?q=${query}`);

@@ -10,6 +10,7 @@ import Register from './page/Register';
 import PostList from './page/PostList';
 import CreatePost from './page/CreatePost';
 import PostDetail from './page/PostDetail';
+import RestaurantList from './page/RestaurantList';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/welcome" element={<PrivateRoute><Welcome /></PrivateRoute>} />
+                <Route path="/restaurants" element={<RestaurantList />} />
                 <Route path="/posts" element={<PostList />} />
                 <Route path="/posts/:postId" element={<PostDetail />} />
                 <Route path="/posts/create" element={<CreatePost />} />
