@@ -1,1 +1,4 @@
 Back/node.js/.env
+.env
+node_modules/
+Back/node.js/node_modules/
