@@ -25,7 +25,7 @@ export const createPost = (token, postData) => api.post('/posts', postData, {
   headers: { Authorization: token },
 });
 export const getPosts = (token) => api.get('/posts', {
-  headers: { Authorization: `Bearer ${token}` },
+  headers: { Authorization: token },
 });
 export const getPostById = (postId) => api.get(`/posts/${postId}`);
 export const updatePost = (token, postId, postData) => api.put(`/posts/${postId}`, postData, {

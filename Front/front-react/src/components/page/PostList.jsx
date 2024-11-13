@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getPosts } from '../../services/api'; // API에서 게시물 목록 가져오는 함수
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchType, setSearchType] = useState('title'); // 기본 검색 타입은 제목
   const navigate = useNavigate();
-
+  const { token } = useContext(AuthContext);
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         console.log('Fetching posts...');
-        const response = await getPosts();
+        const response = await getPosts(token);
         console.log('Posts fetched:', response.data);
         setPosts(response.data); // API에서 가져온 데이터 설정
       } catch (error) {
