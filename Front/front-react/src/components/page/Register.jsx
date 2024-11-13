@@ -14,12 +14,9 @@ const Register = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title text-center">회원가입</h3>
+    <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'grey' }}>
+      <div className="card p-4" style={{ width: '400px' }}>
+      <h3 className="card-title text-center">회원가입</h3>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label className="form-label">사용자 이름</label>
@@ -59,13 +56,15 @@ const Register = () => {
                     회원가입
                   </button>
                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
+          <p className="forgot-password text-right mt-3">
+            Forgot <a href="#">password?</a>
+          </p>
+        </form>
       </div>
     </div>
   );
 };
 
 export default Register;
+
+

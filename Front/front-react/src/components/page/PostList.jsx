@@ -4,6 +4,8 @@ import { getPosts } from '../../services/api'; // API에서 게시물 목록 가
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchType, setSearchType] = useState('title'); // 기본 검색 타입은 제목
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,36 +17,63 @@ const PostList = () => {
         console.error('Error fetching posts:', error);
       }
     };
-
     fetchPosts();
   }, []);
 
   const handlePostClick = (postId) => {
-    console.log('Post clicked:', postId);
-    navigate(`/posts/${postId}`); // 게시물 클릭 시 PostDetail 페이지로 이동
+    navigate(`/posts/${postId}`);
+  };
+
+  // 검색 함수
+  const handleSearch = () => {
+    const filteredPosts = posts.filter((post) =>
+      post[searchType]?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setPosts(filteredPosts);
   };
 
   return (
     <div className="container mt-4">
-        <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="text-center">Posts</h2>
         <button className="btn btn-primary" onClick={() => navigate('/posts/create')}>
           Create Post
         </button>
       </div>
       <h2>Post List</h2>
-      <ul className="list-group">
+      <ul className="list-group mb-4">
         {posts.map((post) => (
-          <li 
-            key={post._id} 
-            className="list-group-item" 
-            onClick={() => handlePostClick(post._id)} 
+          <li
+            key={post._id}
+            className="list-group-item d-flex justify-content-between align-items-center"
+            onClick={() => handlePostClick(post._id)}
             style={{ cursor: 'pointer' }}
           >
-            {post.title}
+            <span>{post.title}</span>
+            <span className="text-muted">{post.userId}</span>
           </li>
         ))}
       </ul>
+      <div className="search-bar mt-4">
+        <select
+          value={searchType}
+          onChange={(e) => setSearchType(e.target.value)}
+          className="form-select mb-2"
+        >
+          <option value="title">Title</option>
+          <option value="username">User Name</option>
+        </select>
+        <input
+          type="text"
+          placeholder={`Search by ${searchType}`}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="form-control mb-2"
+        />
+        <button onClick={handleSearch} className="btn btn-secondary w-100">
+          Search
+        </button>
+      </div>
     </div>
   );
 };
