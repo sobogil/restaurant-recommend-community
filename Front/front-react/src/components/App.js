@@ -11,6 +11,8 @@ import PostList from './page/PostList';
 import CreatePost from './page/CreatePost';
 import PostDetail from './page/PostDetail';
 import RestaurantList from './page/RestaurantList';
+import PrivateRoute from './Auth/PrivateRoute';
+
 
 
 function App() {
@@ -26,9 +28,9 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/welcome" element={<PrivateRoute><Welcome /></PrivateRoute>} />
                 <Route path="/restaurants" element={<RestaurantList />} />
-                <Route path="/posts" element={<PostList />} />
-                <Route path="/posts/:postId" element={<PostDetail />} />
-                <Route path="/posts/create" element={<CreatePost />} />
+                <Route path="/posts" element={<PrivateRoute><PostList /></PrivateRoute>} />
+                <Route path="/posts/:postId" element={<PrivateRoute><PostDetail /></PrivateRoute>} />
+                <Route path="/posts/create" element={<PrivateRoute><CreatePost /></PrivateRoute>} />
               </Routes>
             </div>
           </div>
@@ -39,10 +41,4 @@ function App() {
 }
 
 // 로그인 상태에 따라 접근을 제어하는 PrivateRoute 컴포넌트
-function PrivateRoute({ children }) {
-  const { token } = React.useContext(AuthContext); // AuthContext에서 user 가져오기
-
-  return token ? children : <Navigate to="/" />; // 로그인 되어있으면 자식 컴포넌트 렌더링, 아니면 로그인 페이지로 리디렉션
-}
-
 export default App;
