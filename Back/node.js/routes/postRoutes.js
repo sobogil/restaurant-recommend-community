@@ -8,7 +8,7 @@ const authMiddleware = require('../middleware/auth');
 router.post('/', authMiddleware, postController.createPost);
 
 // 전체 게시글 목록 조회
-router.get('/', postController.getPosts);
+router.get('/', authMiddleware, postController.getPosts);
 
 // 특정 게시글 조회
 router.get('/:postId', postController.getPostById);

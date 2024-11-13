@@ -12,6 +12,7 @@ import CreatePost from './page/CreatePost';
 import PostDetail from './page/PostDetail';
 import RestaurantList from './page/RestaurantList';
 import PrivateRoute from './Auth/PrivateRoute';
+import UserDashboard from './page/UserDashboard';
 
 
 
@@ -26,6 +27,7 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<UserDashboard />} />
                 <Route path="/welcome" element={<PrivateRoute><Welcome /></PrivateRoute>} />
                 <Route path="/restaurants" element={<RestaurantList />} />
                 <Route path="/posts" element={<PrivateRoute><PostList /></PrivateRoute>} />

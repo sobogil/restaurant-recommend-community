@@ -11,7 +11,9 @@ const PostList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        console.log('Fetching posts...');
         const response = await getPosts();
+        console.log('Posts fetched:', response.data);
         setPosts(response.data); // API에서 가져온 데이터 설정
       } catch (error) {
         console.error('Error fetching posts:', error);

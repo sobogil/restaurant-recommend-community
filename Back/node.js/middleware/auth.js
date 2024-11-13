@@ -5,9 +5,9 @@ const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization'); // 요청 헤더에서 토큰 가져오기
 
   // 토큰이 없는 경우
-//   if (!token) {
-//     return res.status(401).json({ message: 'No token, authorization denied' });
-//   }
+   if (!token) {
+     return res.status(401).json({ message: 'No token, authorization denied' });
+   }
 
   try {
     // 토큰 검증
