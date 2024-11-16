@@ -20,6 +20,7 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev')); // 로그 기록
 app.use(bodyParser.json()); // JSON 파싱
+app.use(express.json()); // JSON 파싱
 dbConnect();
 
 

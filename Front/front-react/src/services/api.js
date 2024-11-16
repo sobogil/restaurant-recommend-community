@@ -36,7 +36,7 @@ export const deletePost = (token, postId) => api.delete(`/posts/${postId}`, {
 });
 
 // 댓글 API
-export const addComment = (token, postId, commentData) => api.post(`/comments/${postId}`, commentData, {
+export const addComment = (token, postId, newComment) => api.post(`/comments/${postId}`, newComment, {
   headers: { Authorization: token },
 });
 export const getComments = (postId) => api.get(`/comments/${postId}`);

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getPostById, deletePost, getComments, addComment } from '../../services/api'; // 필요한 API 가져오기
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const PostDetail = () => {
   const { postId } = useParams();
@@ -8,7 +10,7 @@ const PostDetail = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const navigate = useNavigate();
-
+  const { token } = useContext(AuthContext);
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -43,10 +45,11 @@ const PostDetail = () => {
 
   const handleAddComment = async () => {
     try {
-      await addComment(postId, newComment); // 댓글 추가 API 호출
-      setNewComment(''); // 댓글 추가 후 입력창 비우기
-      const updatedComments = await getComments(postId); // 댓글 새로 불러오기
-      setComments(updatedComments.data);
+      if (!newComment.trim()) return;
+
+      const response = await addComment(token, postId, { content: newComment });
+      setComments([...comments, response.data]);
+      setNewComment('');
     } catch (error) {
       console.error('Error adding comment:', error);
     }
@@ -70,8 +73,8 @@ const PostDetail = () => {
       <ul className="list-group">
         {comments.map((comment) => (
           <li key={comment._id} className="list-group-item">
-            <p>{comment.text}</p>
-            <small className="text-muted">By: {comment.username}</small>
+            <p>{comment.content}</p>
+            <small className="text-muted">By: {comment._id}</small>
           </li>
         ))}
       </ul>

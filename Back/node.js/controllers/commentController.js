@@ -4,8 +4,16 @@ const Comment = require('../models/Comment');
 // 댓글 작성
 exports.addComment = async (req, res) => {
   try {
+    console.log('req.body:', req.body);
+    console.log('req.params:', req.params);
+    console.log('req.userId:', req.userId);
     const { content } = req.body;
-    const newComment = await Comment.create({ postId: req.params.postId, userId: req.userId, content });
+    const { postId } = req.params;
+    const userId = req.userId;  
+    console.log('postId:', postId);
+    console.log('userId:', userId);
+    console.log('content:', content);
+    const newComment = await Comment.create({ postId, userId, content });
     res.status(201).json(newComment);
   } catch (error) {
     res.status(500).json({ error: 'Error adding comment' });
