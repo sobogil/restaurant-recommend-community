@@ -31,6 +31,7 @@ export const LikeButton = ({ postId }) => {
 
     try {
       if (isLiked) {
+        console.log("postId", postId);
         await removeLike(token, postId);
         setLikeCount(prev => prev - 1);
         setIsLiked(false);

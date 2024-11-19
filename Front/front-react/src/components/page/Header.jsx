@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import styled from 'styled-components';
+import { colors } from '../../styles/CommonStyles';
 
 const Header = () => {
   const { token, logout } = useContext(AuthContext);
@@ -11,34 +12,97 @@ const Header = () => {
     logout();
     navigate('/');
   };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div className="container">
-        <Link className="navbar-brand" to={'/restaurants'}>
-          main
-        </Link>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul className="navbar-nav ml-auto">
-            {!token ? (
-              <li className="nav-item">
-                <Link className="nav-link" to="/">Login</Link>
-              </li>
-            ) : (
-              <li className="nav-item">
-                <button className="btn btn-link nav-link" onClick={handleLogout}>Logout</button>
-              </li>
-            )}
-            <li className="nav-item">
-              <Link className="nav-link" to="/register">Sign Up</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/posts">게시판</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <Nav>
+      <NavContainer>
+        <Logo to="/restaurants">맛집 커뮤니티</Logo>
+        <NavLinks>
+          {!token ? (
+            <NavItem>
+              <NavLink to="/">로그인</NavLink>
+            </NavItem>
+          ) : (
+            <NavItem>
+              <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+            </NavItem>
+          )}
+          <NavItem>
+            <NavLink to="/register">회원가입</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/posts">게시판</NavLink>
+          </NavItem>
+        </NavLinks>
+      </NavContainer>
+    </Nav>
   );
 };
+
+const Nav = styled.nav`
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+`;
+
+const NavContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Logo = styled(Link)`
+  color: ${colors.primary};
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${colors.secondary};
+  }
+`;
+
+const NavLinks = styled.ul`
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const NavItem = styled.li``;
+
+const NavLink = styled(Link)`
+  color: ${colors.dark};
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${colors.primary};
+  }
+`;
+
+const LogoutButton = styled.button`
+  background: none;
+  border: none;
+  color: ${colors.dark};
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${colors.primary};
+  }
+`;
 
 export default Header;
