@@ -9,42 +9,50 @@ export const LikeButton = ({ postId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const { token, user } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetchLikes();
-  }, [postId]);
-
   const fetchLikes = async () => {
     try {
       const response = await getLikes(postId);
       setLikeCount(response.data.count);
-      setIsLiked(response.data.likes.some(like => like.userId === user?.id));
+      console.log("response.data.likes", response.data.likes[0].userId);
+      console.log("user", user);
+      if (user.userId == response.data.likes[0].userId) {
+        console.log("user", user);
+        const userLike = response.data.likes.find(like => like.userId === user.userId);
+        setIsLiked(!!userLike);
+      }
     } catch (error) {
       console.error('Error fetching likes:', error);
     }
   };
 
+  useEffect(() => {
+    if (token && user && postId) {
+      fetchLikes();
+    }
+  }, [postId, token, user]);
+
   const handleLike = async () => {
-    if (!token) {
+    if (!token || !user) {
       toast.error('로그인이 필요합니다.');
       return;
     }
 
     try {
       if (isLiked) {
-        console.log("postId", postId);
         await removeLike(token, postId);
         setLikeCount(prev => prev - 1);
         setIsLiked(false);
         toast.success('좋아요를 취소했습니다.');
       } else {
-        console.log("hi");
         await addLike(token, postId);
         setLikeCount(prev => prev + 1);
         setIsLiked(true);
         toast.success('좋아요를 눌렀습니다.');
       }
     } catch (error) {
+      console.error('Like error:', error);
       toast.error('작업 중 오류가 발생했습니다.');
+      fetchLikes();
     }
   };
 
@@ -71,6 +79,7 @@ const HeartButton = styled.button`
   cursor: pointer;
   padding: 0.5rem;
   transition: transform 0.2s;
+  color: ${props => props.$isLiked ? 'inherit' : 'inherit'};
 
   &:hover {
     transform: scale(1.1);
