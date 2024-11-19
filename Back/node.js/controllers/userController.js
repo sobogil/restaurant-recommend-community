@@ -18,6 +18,7 @@ exports.registerUser = async (req, res) => {
 // 로그인 및 JWT 발급
 exports.loginUser = async (req, res) => {
   try {
+    console.log('Request body:', req.body); // 요청 바디 확인
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     

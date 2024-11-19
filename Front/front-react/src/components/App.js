@@ -12,6 +12,8 @@ import CreatePost from './page/CreatePost';
 import PostDetail from './page/PostDetail';
 import RestaurantList from './page/RestaurantList';
 import PrivateRoute from './Auth/PrivateRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -34,6 +36,7 @@ function App() {
               </Routes>
             </div>
           </div>
+          <ToastContainer position="bottom-right" />
         </div>
       </Router>
     </AuthProvider>

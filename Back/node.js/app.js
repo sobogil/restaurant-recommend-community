@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
-const favoriteRoutes = require('./routes/favoriteRoutes');
+const likeRoutes = require('./routes/likeRoutes');
 const testRoutes = require('./routes/testRoutes');
 const dbConnect = require('./config/dbConnect'); // dbConnect 가져오기
 // Express 앱 생성
@@ -28,7 +28,7 @@ dbConnect();
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
-app.use('/api/favorites', favoriteRoutes);
+app.use('/api/likes', likeRoutes);
 app.use('/api/test', testRoutes);
 
 // 에러 핸들러 미들웨어

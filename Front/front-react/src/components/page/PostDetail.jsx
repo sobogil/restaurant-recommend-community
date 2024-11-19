@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getPostById, deletePost, getComments, addComment } from '../../services/api'; // 필요한 API 가져오기
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { LikeButton } from '../LikeButton';
 
 const PostDetail = () => {
   const { postId } = useParams();
@@ -62,6 +63,7 @@ const PostDetail = () => {
       <h2>{post.title}</h2>
       <p>By: {post.username}</p>
       <p>{post.content}</p>
+      <LikeButton postId={postId} />
       {/* 유저가 게시글 작성자일 경우에만 삭제 버튼 보이기 */}
       {post.isOwner && (
         <button onClick={handleDelete} className="btn btn-danger">
