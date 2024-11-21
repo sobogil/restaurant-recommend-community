@@ -39,7 +39,7 @@ const PostDetail = () => {
 
   const handleDelete = async () => {
     try {
-      await deletePost(postId);
+      await deletePost(token,postId);
       navigate('/posts'); // 삭제 후 게시물 목록 페이지로 이동
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -72,11 +72,9 @@ const PostDetail = () => {
         
         <ActionSection>
           <LikeButton postId={postId} />
-          {post.isOwner && (
             <DeleteButton onClick={handleDelete}>
               삭제하기
             </DeleteButton>
-          )}
         </ActionSection>
 
         <CommentSection>

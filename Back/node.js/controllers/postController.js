@@ -58,8 +58,10 @@ exports.updatePost = async (req, res) => {
 exports.deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
-    if (post.userId !== req.userId) return res.status(403).json({ error: 'Unauthorized' });
-    await post.remove();
+    if (post.userId != req.userId) return res.status(403).json({ error: 'Unauthorized' });
+    console.log('post.userId:', post.userId);
+    console.log('req.userId:', req.userId);
+    await post.deleteOne();
     res.status(200).json({ message: 'Post deleted' });
   } catch (error) {
     res.status(500).json({ error: 'Error deleting post' });
