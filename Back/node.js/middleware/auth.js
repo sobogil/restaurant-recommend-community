@@ -13,7 +13,7 @@ const authMiddleware = (req, res, next) => {
     console.log('token:', token);
     // 토큰 검증
     const decoded = jwt.verify(token, process.env.JWT_SECRET); // JWT 시크릿은 환경변수에 저장
-    req.userId = '67285e8e060f90a0ab68c867'; // 검증된 사용자 정보를 요청 객체에 추가
+    req.userId = decoded.userId; // 검증된 사용자 정보를 요청 객체에 추가
     console.log('userId:', req.userId);
     //console.log('decoded:', decoded);
     next(); // 다음 미들웨어 또는 컨트롤러로 이동

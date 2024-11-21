@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 // 회원가입
 exports.registerUser = async (req, res) => {
   try {
+    console.log(req.body);
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({ username, email, password: hashedPassword });
@@ -41,6 +42,7 @@ exports.loginUser = async (req, res) => {
 // 사용자 프로필 조회
 exports.getUserProfile = async (req, res) => {
   try {
+    console.log('req.userId:', req.userId);
     const user = await User.findById(req.userId);
     res.status(200).json(user);
   } catch (error) {

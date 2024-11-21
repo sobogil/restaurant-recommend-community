@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String, 
     required: true 
 },
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
   authProvider: { 
     type: String, 
     default: 'local' 

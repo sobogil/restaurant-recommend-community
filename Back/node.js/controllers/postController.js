@@ -31,6 +31,7 @@ exports.getPosts = async (req, res) => {
 exports.getPostById = async (req, res) => {
   try {
     console.log('req.params:', req.params);
+    console.log('req.params.postId:', req.params.postId);
     const post = await Post.findById(req.params.postId);
     res.status(200).json(post);
   } catch (error) {
@@ -62,4 +63,3 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({ error: 'Error deleting post' });
   }
 };
-

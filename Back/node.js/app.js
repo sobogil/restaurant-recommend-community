@@ -12,6 +12,7 @@ const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const likeRoutes = require('./routes/likeRoutes');
 const testRoutes = require('./routes/testRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const dbConnect = require('./config/dbConnect'); // dbConnect 가져오기
 // Express 앱 생성
 const app = express();
@@ -30,12 +31,14 @@ app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/likes', likeRoutes);
 app.use('/api/test', testRoutes);
+app.use('/api/admin', adminRoutes);
 
 // 에러 핸들러 미들웨어
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
 });
+
 
 //네이버 api
 app.get('/api/restaurants', async (req, res) => {

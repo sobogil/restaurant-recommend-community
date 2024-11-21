@@ -14,6 +14,8 @@ import RestaurantList from './page/RestaurantList';
 import PrivateRoute from './Auth/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Admin from './page/Admin';
+
 
 
 
@@ -33,6 +35,7 @@ function App() {
                 <Route path="/posts" element={<PrivateRoute><PostList /></PrivateRoute>} />
                 <Route path="/posts/:postId" element={<PrivateRoute><PostDetail /></PrivateRoute>} />
                 <Route path="/posts/create" element={<PrivateRoute><CreatePost /></PrivateRoute>} />
+                <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} />
               </Routes>
             </div>
           </div>
