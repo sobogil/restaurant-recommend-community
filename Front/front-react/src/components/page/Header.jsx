@@ -33,6 +33,9 @@ const Header = () => {
           <NavItem>
             <NavLink to="/posts">게시판</NavLink>
           </NavItem>
+          <NavItem>
+              <NavLink to="/profile">프로필</NavLink>
+            </NavItem>
         </NavLinks>
       </NavContainer>
     </Nav>

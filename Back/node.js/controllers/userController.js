@@ -53,9 +53,35 @@ exports.getUserProfile = async (req, res) => {
 // 사용자 프로필 업데이트
 exports.updateUserProfile = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.userId, req.body, { new: true });
+    const { username, password, newPassword } = req.body;
+    const user = await User.findById(req.userId);
+
+    // 현재 비밀번호 확인
+      if (password) {
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return res.status(400).json({ error: 'Current password is incorrect' });
+      }
+    }
+
+    // 업데이트할 데이터 준비
+    const updateData = {};
+    if (username) updateData.username = username;
+    
+    // 새로운 비밀번호가 있다면 해시화하여 저장
+    if (newPassword) {
+      updateData.password = await bcrypt.hash(newPassword, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.userId,
+      updateData,
+      { new: true }
+    ).select('-password'); // 응답에서 비밀번호 필드 제외
+
     res.status(200).json(updatedUser);
   } catch (error) {
+    console.error('Profile update error:', error);
     res.status(500).json({ error: 'Error updating profile' });
   }
 };

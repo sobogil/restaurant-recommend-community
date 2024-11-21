@@ -46,14 +46,7 @@ const Login = () => {
               required
             />
           </FormGroup>
-          <CheckboxGroup>
-            <Checkbox type="checkbox" id="rememberMe" />
-            <CheckboxLabel htmlFor="rememberMe">Remember me</CheckboxLabel>
-          </CheckboxGroup>
           <SubmitButton type="submit">Sign In</SubmitButton>
-          <ForgotPassword>
-            Forgot <ForgotLink href="#">password?</ForgotLink>
-          </ForgotPassword>
         </Form>
       </LoginCard>
     </LoginContainer>

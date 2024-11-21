@@ -20,7 +20,9 @@ exports.createPost = async (req, res) => {
 // 전체 게시글 목록 조회
 exports.getPosts = async (req, res) => {
   try {
+    
     const posts = await Post.find();
+    console.log('@@@@@:', req.userId);
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching posts' });
