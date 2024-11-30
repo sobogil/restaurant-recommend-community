@@ -42,33 +42,33 @@
 ## API 엔드포인트
 
 ### 사용자 관련
-POST /api/users/register - 회원가입
-POST /api/users/login - 로그인
-GET /api/users/profile - 프로필 조회
-PUT /api/users/profile - 프로필 수정
+POST /api/users/register - 회원가입  
+POST /api/users/login - 로그인  
+GET /api/users/profile - 프로필 조회  
+PUT /api/users/profile - 프로필 수정  
 
 ### 게시글 관련
-GET /api/posts - 게시글 목록 조회
-POST /api/posts - 게시글 작성
-GET /api/posts/:postId - 특정 게시글 조회
-PUT /api/posts/:postId - 게시글 수정
-DELETE /api/posts/:postId - 게시글 삭제
+GET /api/posts - 게시글 목록 조회  
+POST /api/posts - 게시글 작성  
+GET /api/posts/:postId - 특정 게시글 조회  
+PUT /api/posts/:postId - 게시글 수정  
+DELETE /api/posts/:postId - 게시글 삭제  
 
 ### 댓글 관련
-POST /api/comments/:postId - 댓글 작성
-GET /api/comments/:postId - 댓글 목록 조회
-DELETE /api/comments/:commentId - 댓글 삭제
+POST /api/comments/:postId - 댓글 작성  
+GET /api/comments/:postId - 댓글 목록 조회  
+DELETE /api/comments/:commentId - 댓글 삭제  
 
 ### 좋아요 관련
-POST /api/likes - 좋아요 추가
-GET /api/likes/:postId - 좋아요 수 조회
-DELETE /api/likes/:postId - 좋아요 취소
+POST /api/likes - 좋아요 추가  
+GET /api/likes/:postId - 좋아요 수 조회  
+DELETE /api/likes/:postId - 좋아요 취소  
 
 ### 관리자 관련
-GET /api/admin/users - 전체 사용자 조회
-GET /api/admin/posts - 전체 게시글 조회
-DELETE /api/admin/users/:userId - 사용자 삭제
-DELETE /api/admin/posts/:postId - 게시글 삭제
+GET /api/admin/users - 전체 사용자 조회  
+GET /api/admin/posts - 전체 게시글 조회  
+DELETE /api/admin/users/:userId - 사용자 삭제  
+DELETE /api/admin/posts/:postId - 게시글 삭제  
 
 ## 프로젝트 구조
 ```
