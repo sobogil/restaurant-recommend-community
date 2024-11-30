@@ -16,8 +16,6 @@
 - React Router DOM
 - Styled Components
 - Axios
-- React-Toastify
-- Bootstrap
 
 ## 주요 기능
 
@@ -36,12 +34,10 @@
 ### 3. 맛집 정보
 - 네이버 API 연동
 - 지역별 맛집 검색
-- 맛집 즐겨찾기
 
 ### 4. 관리자 기능
 - 사용자 관리
 - 게시글 관리
-- 시스템 모니터링
 
 ## API 엔드포인트
 
@@ -131,10 +127,7 @@ node app.js
 npm start
 ```
 
-## 라이선스
-This project is licensed under the MIT License - see the LICENSE file for details
-
-## 스크린샷
+## 웹 페이지 
 
 ### 로그인 페이지
 ![로그인 페이지](./assets/login.png)
@@ -143,15 +136,14 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ![메인 페이지](./assets/main.png)
 
 ### 게시판 목록
-![게시판 목록](./assets/posts.png)
+![게시판 목록](./assets/postList.png)
 
 ### 게시글 상세
-![게시글 상세](./assets/post-detail.png)
-
-### 맛집 검색
-![맛집 검색](./assets/restaurant-search.png)
+![게시글 상세](./assets/postDetail.png)
 
 ### 관리자 페이지
 ![관리자 페이지](./assets/admin.png)
-```
 
+
+## 라이선스
+This project is licensed under the MIT License - see the LICENSE file for details
