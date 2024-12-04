@@ -24,8 +24,8 @@ services:
     environment:
       - DB_CONNECT=mongodb://mongodb:27017/restaurant-db
       - JWT_SECRET=mySuperSecretKey12345
-      - NAVER_CLIENT_ID=PexgiXrlw9BSBiH7LokK
-      - NAVER_CLIENT_SECRET=OrTBhycDDE
+      - NAVER_CLIENT_ID=???
+      - NAVER_CLIENT_SECRET=???
     networks:
       - app-network
 

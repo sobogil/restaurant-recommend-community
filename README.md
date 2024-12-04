@@ -17,6 +17,11 @@
 - Styled Components
 - Axios
 
+### DevOps
+- Docker
+- Docker Compose
+- Nginx
+
 ## 주요 기능
 
 ### 1. 사용자 인증
@@ -92,38 +97,46 @@ project/
 
 ## 설치 및 실행 방법
 
+### Docker를 사용한 실행 (권장)
 1. 저장소 클론
 ```bash
 git clone [repository-url]
 ```
 
-2. 백엔드 설정
-```bash
-cd Back/node.js
-npm install
-```
-
-3. 프론트엔드 설정
-```bash
-cd Front/front-react
-npm install
-```
-
-4. 환경 변수 설정
+2. 환경 변수 설정
 - Back/node.js/.env 파일 생성
 ```
-MONGODB_URI=your_mongodb_uri
+MONGODB_URI=mongodb://mongodb:27017/restaurant-db
 JWT_SECRET=your_jwt_secret
 NAVER_CLIENT_ID=your_naver_client_id
 NAVER_CLIENT_SECRET=your_naver_client_secret
 ```
 
-5. 서버 실행
-```bash
-# 백엔드 실행 (Back/node.js 디렉토리에서)
-node app.js
+3. Docker Compose로 실행
 
-# 프론트엔드 실행 (Front/front-react 디렉토리에서)
+```bash
+docker-compose up --build
+```
+
+4. 접속
+- 프론트엔드: http://localhost:8888
+- 백엔드: http://localhost:5000
+- MongoDB: mongodb://localhost:27017
+
+### 로컬 개발 환경 실행
+1. 백엔드 설정
+
+```bash
+cd Back/node.js
+npm install
+node app.js
+```
+
+2. 프론트엔드 설정
+
+```bash
+cd Front/front-react
+npm install
 npm start
 ```
 
