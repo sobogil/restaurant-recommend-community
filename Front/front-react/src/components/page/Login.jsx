@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/welcome');
+      navigate('/restaurants');
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid credentials. Please try again.');

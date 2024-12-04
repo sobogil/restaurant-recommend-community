@@ -1,0 +1,46 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./Front/front-react
+      dockerfile: Dockerfile
+    ports:
+      - "8888:80"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./Back/node.js
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - DB_CONNECT=mongodb://mongodb:27017/restaurant-db
+      - JWT_SECRET=mySuperSecretKey12345
+      - NAVER_CLIENT_ID=PexgiXrlw9BSBiH7LokK
+      - NAVER_CLIENT_SECRET=OrTBhycDDE
+    networks:
+      - app-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

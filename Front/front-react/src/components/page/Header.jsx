@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <Nav>
       <NavContainer>
-        <Logo to="/restaurants">맛집 커뮤니티</Logo>
+        <Logo to="/restaurants">밥먹자</Logo>
         <NavLinks>
           {!token ? (
             <NavItem>
